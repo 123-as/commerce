@@ -4,7 +4,7 @@ import { combineReducers } from "redux";
 const auth={
     isSigned:null,
     id:null
-}
+};
 
 
 
@@ -15,7 +15,7 @@ const shopList=(state={},action)=>{
         default:
             return state
     }
-}
+};
 
 
 
@@ -28,9 +28,9 @@ const shopList=(state={},action)=>{
         default:
             return state;
     }
-}
+};
 
 export default combineReducers({
     useID,
     shopList
-})
+});
