@@ -31,22 +31,25 @@ const Products=({add})=>{
     const getItem=()=>{
         return (
             itemList.map(item=>(
-                <div className="card" key={item.id}>
-                    <div className="image">
+                <div className="products-list-item" key={item.id}>
+                    <div className="products-list-image">
                         <img src={item.media.source} />
                     </div>
-                    <div className="content">
-                        <div className="header">{item.name}</div>
-                        <div className="description" dangerouslySetInnerHTML={{__html:item.description}}>
+
+                    <div className="products-list-content">
+                        <div>
+                            <div className="products-list-header">{item.name}</div>
+                            <div className="products-list-description" dangerouslySetInnerHTML={{__html:item.description}}>
+                            </div>
                         </div>
-                    </div>
-                    <div className="extra content">
-                        <span>
-                            {item.price.formatted_with_symbol}
-                        </span>
-                        <span className="right floated">
-                            {isSigned?<button className="ui button" onClick={()=>{add(item.id)}}><i className="shop icon " ></i></button>:null}
-                        </span>
+                        <div className="products-list-extra">
+                            <span>
+                                {item.price.formatted_with_symbol}
+                            </span>
+                            <span className="right">
+                                {isSigned?<button className="products-list-btn" onClick={()=>{add(item.id)}}><i className="fas fa-shopping-cart" ></i></button>:null}
+                            </span>
+                        </div>
                     </div>
                 </div>
             ))
@@ -55,22 +58,23 @@ const Products=({add})=>{
 
 
     return (
-        <div className="ui grid">
-            <div className="three wide column">
-                <div className="ui vertical fluid tabular menu">
-                <a className="item " onClick={()=>setSort('all')}>
+        <div className="products">
+            <div>
+                <div className="products-menu">
+                <a className="products-menu-item" onClick={()=>setSort('all')}>
                     All
                 </a>
-                <a className="item"  onClick={()=>setSort('shoe')}>
+                <a className="products-menu-item"  onClick={()=>setSort('shoe')}>
                     Shoe
                 </a>
-                <a className="item" onClick={()=>setSort('shirt')}>
+                <a className="products-menu-item" onClick={()=>setSort('shirt')}>
                     Shirt
                 </a>
                 </div>
             </div>
-            <div className="thirteen wide stretched column">
-                <div className="ui  cards">
+
+            <div>
+                <div className="products-list">
                     {getItem()}
                 </div>
             </div>

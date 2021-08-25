@@ -3,10 +3,10 @@ import GoogleAuth from './GoogleAuth';
 import {Link} from 'react-router-dom';
 const Header =()=>{
     return (
-        <div className="ui menu secondary">
+        <div className="header">
             <Link to='/' className="item">ECO</Link>
             
-            <div className="right menu">
+            <div className="header-google">
                 <GoogleAuth />
             </div>
         </div>

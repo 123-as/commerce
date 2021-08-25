@@ -27,25 +27,23 @@ const Cart=()=>{
             return <div>Nothing</div>
         }
         return cartList.line_items.map(item=>(
-            <div className="four wide column card" key={item.id}>
+            <div className="card" key={item.id}>
              
-                    <div className="content">
-                    <img className="right floated mini ui image" src={item.media.source}/>
-                    <div className="header">
+                    <div className="card-content">
+                    <img src={item.media.source} className="right card-img"/>
+                    <div className="card-title">
                         {item.name}
                     </div>
-                    <div className="meta">
+                    <div className="card-name">
                        quantity:{item.quantity}
                     </div>
-                    <div className="description">
+                    <div >
                         共:{item.line_total.formatted_with_symbol}
                     </div>
                     </div>
-                    <div className="extra content">
-                    <div className="ui two buttons">
-                        <div className="ui basic green button large" onClick={()=>add(item.id,item.quantity)}>+</div>
-                        <div className="ui basic red button large"   onClick={()=>reduce(item.id,item.quantity)}>-</div>
-                    </div>
+                    <div className="card-content card-btn">
+                        <div className="btn card-btn-red" onClick={()=>add(item.id,item.quantity)}>+</div>
+                        <div className="btn card-btn-yellow"   onClick={()=>reduce(item.id,item.quantity)}>-</div>
                     </div>
             </div>
         ))
@@ -66,23 +64,23 @@ const Cart=()=>{
     }
     
     return (
-        <div className="ui grid container">
-            <div className="ui cards">
+        <div>
+            <div className="cards">
                 {rendershop()}
             </div>
             
 
-            <div className="two column  row">
-                <div className="column">
+            <div className="cards-flex cards">
+                <div >
                     總價錢:{cartList&&cartList.subtotal.formatted_with_symbol}
                 </div>
-                <div className="column">
-                <Link className="ui button right floated" to='/checkout'>
-                        Checkout
-                </Link>
-                <button className="ui secondary button right floated" onClick={empty}>
-                       Clean Cart
-                </button>
+                <div>
+                    <Link className="right  cards-btn" to='/checkout'>
+                            Checkout
+                    </Link>
+                    <div className="right cards-btn" onClick={empty}>
+                        Clean Cart
+                    </div>
                 </div>
             </div>
         </div>

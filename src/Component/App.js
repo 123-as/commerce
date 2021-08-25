@@ -6,6 +6,7 @@ import { commerce } from './Commerce';
 import { useDispatch ,useSelector} from 'react-redux';
 import Cart from './Cart';
 import Checkout from './Checkout';
+import '../css/style.css';
 const App=()=>{
     const dispatch=useDispatch();
     const userId=useSelector((state)=>state.useID.id);
@@ -45,7 +46,7 @@ const App=()=>{
 
 
     return (
-        <div className="ui container">
+        <div className="container">
             <BrowserRouter>
                 <Header />
                 <Route path='/' exact>

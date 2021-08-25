@@ -8,7 +8,7 @@ const GoogleAuth=()=>{
     const isSigned=useSelector((state)=>state.useID.isSigned);
 
     const dispatch=useDispatch();
-
+    console.log(process.env.REACT_GOOGLE)
 
     const history=useHistory();
     useEffect(()=>{
@@ -41,29 +41,27 @@ const GoogleAuth=()=>{
             return;
         else if(isSigned===true)
             return (
-                <div>
-                <Link className="ui vertical animated button" to='/cart'>
-                    <div className="hidden content">Shop</div>
-                    <div className="visible content">
-                        <i className="shop icon"></i>
+                <>
+                <Link className="header-cart" to='/cart'>
+                    <div className="header-cart-shop">Shop</div>
+                    <div className="header-cart-icon">
+                        <i className="fas fa-shopping-cart"></i>
                     </div>
                 </Link>
 
-                <button className="ui google  button red" 
+                <button className="header-btn"
                 onClick={()=>{window.gapi.auth2.getAuthInstance().signOut()}}>
 
-                    <i className="google icon"></i>
+                    <i className="fab fa-google" style={{marginRight:"0.5rem"}}></i>
                     Sign out
                  </button>
-                 </div>
+                 </>
             )
         else if(isSigned===false)
         return (
-            <button className="ui google  button red" 
+            <button className="header-btn" 
             onClick={()=>{ window.gapi.auth2.getAuthInstance().signIn()}}>
-
-
-                <i className="google icon"></i>
+                <i className="fab fa-google" style={{marginRight:"0.5rem"}}></i>
                 Sign in
              </button>
         )

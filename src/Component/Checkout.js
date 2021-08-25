@@ -16,6 +16,7 @@ const Checkout =()=>{
         const getOrderId=async ()=>{
             const response = await commerce.checkout.generateToken(cart[userId].id, { type: 'cart'});
             setOrder(response);
+            console.log(response);
         }
 
         if(cart[userId])
@@ -35,21 +36,25 @@ const Checkout =()=>{
     }
     return (
         <>
-            <div className="ui ordered steps">
-                <div className={`step ${step===0? "active":"completed"}`}>
-                    <div className="content">
-                        <div className="title">Shipping</div>
-                        <div className="description">Choose your shipping options</div>
+            <div className="step">
+                <div className={`step-item ${step===0? "active":"completed"}`}>
+                    <div className="step-content">
+                        <div className="step-content-area">
+                            <div className="title">Shipping</div>
+                            <div className="description">Choose your shipping options</div>
+                        </div>
                     </div>
                 </div>
 
-                <div className={`step ${step<=1?"active":"completed"}`}>
-                    <div className="content">
-                        <div className="title">Confirm Order</div>
-                        <div className="description">Verify order details</div>
+                <div className={`step-item ${step<=1?"active":"completed"}`}>
+                    <div className="step-content">
+                        <div className="step-content-area">
+                            <div className="title">Confirm Order</div>
+                            <div className="description">Verify order details</div>
+                        </div>
                     </div>
                 </div>
-        </div>
+            </div>
 
         {step===2? <div>完成付款</div>: form() }
         <div>

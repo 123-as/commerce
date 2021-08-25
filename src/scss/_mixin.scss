@@ -1,0 +1,18 @@
+
+//最小寬度:400,640,1024,1400
+$breakpoint-up:("small":"25em","medium":"40em","large":"64em","xlarge":"87.5em");
+
+//最大寬度:399,639,1023,1399
+$breakpoint-down:("xsmall":"26.25em","small":"39.9375em","medium":"63.9375em","large":"87.4375em");
+
+@mixin breakpoint-up($size) {
+    @media (min-width:map-get($breakpoint-up,$size)){
+        @content;
+    }
+}
+
+@mixin breakpoint-down($size){
+    @media (max-width:map-get($breakpoint-down,$size)){
+        @content;
+    }
+}
