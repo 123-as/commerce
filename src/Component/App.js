@@ -7,12 +7,13 @@ import { useDispatch ,useSelector} from 'react-redux';
 import Cart from './Cart';
 import Checkout from './Checkout';
 import '../css/style.css';
+import Slider from './Slider';
 const App=()=>{
     const dispatch=useDispatch();
     const userId=useSelector((state)=>state.useID.id);
     const shopList=useSelector((state)=>Object.keys(state.shopList));
     const cart=useSelector(state=>state.shopList);
-    
+    console.log(cart);
     useEffect(()=>{
         const getShop=async ()=>{
             if(shopList.length===0|| shopList.every(item=>item!==userId)){
@@ -46,10 +47,13 @@ const App=()=>{
 
 
     return (
-        <div className="container">
+        <div>
             <BrowserRouter>
                 <Header />
                 <Route path='/' exact>
+                    <Slider/>
+                </Route>
+                <Route path='/product' exact>
                     <Products add={addShop}/>
                 </Route>
 

@@ -3,11 +3,13 @@ import GoogleAuth from './GoogleAuth';
 import {Link} from 'react-router-dom';
 const Header =()=>{
     return (
-        <div className="header">
-            <Link to='/' className="item">ECO</Link>
-            
-            <div className="header-google">
-                <GoogleAuth />
+        <div style={{backgroundColor:"#000"}}>
+            <div className="header container">
+                <Link to='/' className="header-title">ECO</Link>
+                
+                <div className="header-google">
+                    <GoogleAuth />
+                </div>
             </div>
         </div>
     )

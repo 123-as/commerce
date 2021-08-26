@@ -1,12 +1,11 @@
 import React , {useState,useEffect} from 'react';
 import { commerce } from './Commerce';
 import { useSelector } from 'react-redux';
-
 const Products=({add})=>{
     const [sort,setSort]=useState('all');
     const isSigned=useSelector((state)=>state.useID.isSigned);
 
-
+    const [page,setPage]=useState(1);
     const [itemList,setItemList]=useState([]);
     useEffect(()=>{
         const getList= async()=>{
@@ -24,13 +23,18 @@ const Products=({add})=>{
         getList();
     },[sort]);
 
-
     
-
     //單格商品
     const getItem=()=>{
+        let list;
+        if(page===1){
+             list=itemList.slice(0,4);
+        }
+        else if(page===2){
+            list=itemList.slice(4,itemList.length);
+        }
         return (
-            itemList.map(item=>(
+            list.map(item=>(
                 <div className="products-list-item" key={item.id}>
                     <div className="products-list-image">
                         <img src={item.media.source} />
@@ -57,8 +61,24 @@ const Products=({add})=>{
     }
 
 
+    //判斷頁數
+    const  renderPage=()=>{
+        if(itemList.length!==0){
+            switch(itemList.length){
+                case 4:
+                    return  <span onClick={()=>{setPage(1)}}>1</span>;
+                default:
+                    return (
+                        <>
+                            <span onClick={()=>{setPage(1)}}>1</span>
+                            <span onClick={()=>{setPage(2)}}>2</span>
+                        </>
+                    )
+            }
+        }
+    }
     return (
-        <div className="products">
+        <div className="products container">
             <div>
                 <div className="products-menu">
                 <a className="products-menu-item" onClick={()=>setSort('all')}>
@@ -73,11 +93,29 @@ const Products=({add})=>{
                 </div>
             </div>
 
-            <div>
-                <div className="products-list">
-                    {getItem()}
+            {itemList.length===0?
+
+                <div className="loading">
+                    <div className="loading-time">
+                    </div>
+                    <div className="loading-item">
+                    </div>
+                    <div className="loading-text">
+                        Loading
+                    </div>
                 </div>
-            </div>
+                :
+                <div>
+                    <div className="products-list">
+                        {getItem()}
+
+                        <div className="products-page">
+                            {renderPage()}
+                        </div>
+                    </div>
+                </div>
+            }
+
         </div>
     )
 }

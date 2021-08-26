@@ -38,7 +38,6 @@ span{
 .container{
     max-width: 67.5rem;
     margin: 0 auto;
-    padding:0 0.75rem;
 }
 
 .header{
@@ -46,8 +45,13 @@ span{
     justify-content: space-between;
     padding:1rem ;
     align-items: center;
+    color:#fff;
     &-google{
         display: flex;
+    }
+    &-title{
+        color: #fff;
+        font-weight: bold;
     }
     &-btn{
         padding:0.75rem;
@@ -80,11 +84,27 @@ span{
           margin-right: -2.5rem;
           transition: .3s;
         }
-
+        &-search{
+           margin-right: -4.3rem;
+        }
         &:hover &-shop{
           transform: scale(1);
           margin-right: 0.5rem;
         }
+
+        @include breakpoint-down(xsmall){
+            &:hover &-shop{
+                transform: scale(0);
+                margin-right: -2.5rem;
+              }
+        }
+        @include breakpoint-down(xsmall){
+            &:hover &-search{
+                transform: scale(0);
+                margin-right: -4.3rem;
+              }
+        }
+
     }
 }
 
@@ -104,13 +124,36 @@ span{
         display: flex;
         flex-direction: column;
         &-item{
-            padding: 20px 0;
+            padding:1.25rem 0;
             font-size: 1.1rem;
+            font-weight: 800;
+
+            //hover效果
+            &::after{
+                content: '';
+                width: 0;
+                height: 0.5rem;
+                display: block;
+                background: $gray;
+                transition: .3s;
+            }
+            &:hover{
+                &::after{
+                    width: 40%;
+                }
+            }
+
+            @include breakpoint-down(xsmall){
+                &:hover{
+                    &::after{
+                        width: 0;
+                    }
+                }
+            }
         }
         @include breakpoint-down(xsmall){
             flex-direction: row;
             justify-content: space-between;
-            
         }
     }
 
@@ -120,7 +163,13 @@ span{
         flex-wrap: wrap;
         justify-content: space-between;
 
-        
+        &-description{
+            font-size: 1.2rem;
+            color:$gray;
+            > p{
+                margin-top: 0;
+            }
+        }
         &-item{
             flex-basis: 30%;
             min-width: 20rem;
@@ -154,12 +203,32 @@ span{
 
 
         &-btn{
-            padding:0.75rem 1rem;
+            padding:0.75rem 1.4rem;
             border:none;
             background-color: $gray;
             border-radius: 5px;
             cursor: pointer;
+            transition: .3s ease-in-out;
+            &:hover{
+                transform: scale(1.08);
+            }
         }
+    }
+
+    &-page{
+        width: 100%;
+       & >span{
+           border:1px solid #000;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: inline-block;
+            line-height: 2.5rem;
+            text-align: center;
+            cursor: pointer;
+            &:not(:first-child){
+                margin-left: 1.2rem;
+            }
+       }
     }
 }
 
@@ -416,4 +485,168 @@ span{
       &:first-child{
           margin-right: 0.8rem;
       }
+}
+
+
+//loading
+.loading{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    background-color: rgba(0,0,0,0.6);
+
+    &-time{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        border:12px solid rgba(0,0,0,0.4);
+    }
+
+    &-item{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%) rotate(45deg);
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        border-width: 12px;
+        border-style: solid;
+        border-color: #fff transparent transparent transparent;
+        animation: rotate 1s infinite linear;
+    }
+
+    &-text{
+        position: absolute;
+        top:63%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        font-size: 1.2rem;
+    }
+}
+
+//slider
+.slider{
+    position: relative;
+    padding: 2rem 0;
+    @include breakpoint-down(large){
+        margin: 0 auto;
+    }
+    &-left{
+        position: absolute;
+        left:0;
+        top:50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border-radius: 50%;
+        font-size: 3rem;
+        border:none;
+        text-align: center;
+        color:#fff;
+        cursor: pointer;
+        z-index: 50;
+        @include breakpoint-down(xsmall){
+            font-size: 2rem;
+        }
+    }
+    &-right{
+        position: absolute;
+        right: 0;
+        top:50%;
+        transform: translateY(-50%);
+        background: transparent;
+        border-radius: 50%;
+        font-size: 3rem;
+        border:none;
+        color:#fff;
+        cursor: pointer;
+        //因為後面圖片動畫時間為1s,圖片會蓋住按鈕,所以需要把按鈕的位層設高
+        z-index: 50;
+        @include breakpoint-down(xsmall){
+            font-size: 2rem;
+        }
+    }
+    &-img{
+        width: 100%;
+        height: 600px;
+        border-radius: 5px;
+        @include breakpoint-down(xsmall){
+            object-fit: cover;
+           border-radius: 0px;
+            height: 400px;
+        }
+    }
+
+    &-item{
+      opacity: 0;
+      transition: .8s;
+      &-active{
+         opacity: 1;
+         transition: .8s;
+      }
+    }
+}
+
+
+//icon
+.icon{
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    &-item{
+        width: 8.75rem;
+        filter: grayscale(100%);
+        cursor: pointer;
+        &:hover{
+            filter: grayscale(0);
+        }
+        & > img{
+            width: 100%;
+        }
+    }
+}
+
+//accordion
+.ac{
+    padding:4rem 1rem;
+    &-item{
+        padding:0.75rem;
+        margin: 0 auto;
+        border-bottom:2px solid #ccc;
+        cursor: pointer;
+    }
+    &-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-active{
+        opacity: 1;
+        transition: .5s;
+        &.ac-content{
+            margin-top:0.5rem;
+        }
+    }
+
+    &-hidden{
+        opacity: 0;
+        transition: .5s;
+    }
+
+    &-content{
+        font-size: 18px;
+        line-height: 1.5;
+    }
+}
+.accordion{
+    background: radial-gradient(#fff,$silver);
 }

@@ -24,9 +24,13 @@ const Cart=()=>{
 
     const rendershop=()=>{
         if(!cartList){
-            return <div>Nothing</div>
+            return <div>loading</div>
         }
-        return cartList.line_items.map(item=>(
+        if(cartList.line_items.length===0){
+            return <div>目前購物車無商品</div>
+        }
+        return (
+            cartList.line_items.map(item=>(
             <div className="card" key={item.id}>
              
                     <div className="card-content">
@@ -46,7 +50,7 @@ const Cart=()=>{
                         <div className="btn card-btn-yellow"   onClick={()=>reduce(item.id,item.quantity)}>-</div>
                     </div>
             </div>
-        ))
+        )))
     }
 
     const add=async (id,num)=>{
@@ -64,7 +68,7 @@ const Cart=()=>{
     }
     
     return (
-        <div>
+        <div className="container">
             <div className="cards">
                 {rendershop()}
             </div>

@@ -35,7 +35,7 @@ const Checkout =()=>{
         return step===0? order&&<Address order={order} next={next}/>: <Payment back={back} order={order}  next={next}/>
     }
     return (
-        <>
+        <div className="container">
             <div className="step">
                 <div className={`step-item ${step===0? "active":"completed"}`}>
                     <div className="step-content">
@@ -56,10 +56,10 @@ const Checkout =()=>{
                 </div>
             </div>
 
-        {step===2? <div>完成付款</div>: form() }
+        {step===2? <div style={{padding:"1rem"}}>完成付款</div>: form() }
         <div>
         </div>
-      </>
+      </div>
     )
 }
 
