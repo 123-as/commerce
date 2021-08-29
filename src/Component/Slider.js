@@ -13,7 +13,6 @@ const Slider =()=>{
         }
     ]
     const [current,setcurrent]=useState(0);
-   console.log(current);
     useEffect(()=>{
         const id=setInterval(()=>{
             if(current===imgList.length-1){
@@ -55,7 +54,7 @@ const Slider =()=>{
                 {imgList.map((item,index)=>{
                     return (
                         <div key={index} className={index===current?"slider-item-active":"slider-item"}>
-                            {current===index&&<img src={item.img} className="slider-img"/>}
+                            {current===index&&<img src={item.img} className="slider-img" alt="新品"/>}
                         </div>
                     )
                 })}
@@ -67,19 +66,19 @@ const Slider =()=>{
         <div style={{backgroundColor:"#F2F2F2"}}>
             <div className="icon container">
                 <div className="icon-item">
-                    <img src="https://www.searchpng.com/wp-content/uploads/2018/12/Oppo-Logo-Png.png" /> 
+                    <img src="https://www.pngarea.com/pngm/146/8079657_converse-logo-png-all-star-converse-logo-png.png" alt="新品"/> 
                 </div>
                 <div className="icon-item">
-                    <img src="https://www.pngkit.com/png/full/299-2994938_free-download-tnis-nike-sb-mavrk-3-skate.png" /> 
+                    <img src="https://www.pngkit.com/png/full/299-2994938_free-download-tnis-nike-sb-mavrk-3-skate.png" alt="新品"/> 
                 </div>
                 <div className="icon-item">
-                    <img src="https://www.downloadclipart.net/large/adidas-logo-png-picture.png" /> 
+                    <img src="https://www.downloadclipart.net/large/adidas-logo-png-picture.png" alt="新品"/> 
                 </div>
                 <div className="icon-item">
-                    <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png" /> 
+                    <img src="https://www.seekpng.com/png/detail/380-3806937_under-armour-logo-svg-fila-logo-png.png" alt="新品"/> 
                 </div>
                 <div className="icon-item">
-                    <img src="https://logos-world.net/wp-content/uploads/2020/03/Coca-Cola-Symbol.png" /> 
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQan7cza9cUWrp4F9nc8pjhnZbk22wFHChkbDzSdQq_XMOPLtkHBSqWKzWz5qDaqFYKKs&usqp=CAU" alt="新品"/> 
                 </div>
             </div>
         </div>

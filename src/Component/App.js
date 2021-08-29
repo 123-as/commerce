@@ -13,7 +13,6 @@ const App=()=>{
     const userId=useSelector((state)=>state.useID.id);
     const shopList=useSelector((state)=>Object.keys(state.shopList));
     const cart=useSelector(state=>state.shopList);
-    console.log(cart);
     useEffect(()=>{
         const getShop=async ()=>{
             if(shopList.length===0|| shopList.every(item=>item!==userId)){

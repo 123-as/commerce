@@ -17,6 +17,7 @@ const Products=({add})=>{
                 }
             })
             setItemList(list);
+            setPage(1);
         }
 
 
@@ -37,7 +38,7 @@ const Products=({add})=>{
             list.map(item=>(
                 <div className="products-list-item" key={item.id}>
                     <div className="products-list-image">
-                        <img src={item.media.source} />
+                        <img src={item.media.source} alt="新品"/>
                     </div>
 
                     <div className="products-list-content">
@@ -81,13 +82,13 @@ const Products=({add})=>{
         <div className="products container">
             <div>
                 <div className="products-menu">
-                <a className="products-menu-item" onClick={()=>setSort('all')}>
+                <a className="products-menu-item" onClick={()=>{setSort('all');}} href="#">
                     All
                 </a>
-                <a className="products-menu-item"  onClick={()=>setSort('shoe')}>
+                <a className="products-menu-item"  onClick={()=>{setSort('shoe');}} href="#">
                     Shoe
                 </a>
-                <a className="products-menu-item" onClick={()=>setSort('shirt')}>
+                <a className="products-menu-item" onClick={()=>{setSort('shirt');}} href="#">
                     Shirt
                 </a>
                 </div>
