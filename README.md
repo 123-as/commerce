@@ -8,7 +8,8 @@
 
 ### 代碼詳解
 
-``` const getShop=async ()=>{
+``` 
+const getShop=async ()=>{
             if(shopList.length===0|| shopList.every(item=>item!==userId)){
                 const response=await commerce.cart.refresh();
                 dispatch({type:"SHOP_LIST",payload:{...response,userId}});
