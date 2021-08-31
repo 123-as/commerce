@@ -1,4 +1,4 @@
-# 電傷網站
+# 電商網站
 
 [Demo](https://dazzling-neumann-c12db0.netlify.app/)
 ## 主要功能
