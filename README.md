@@ -1,10 +1,10 @@
-# Getting Started with Create React App
+# 電傷網站
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Demo](https://dazzling-neumann-c12db0.netlify.app/)
+## 主要功能
 
-## Available Scripts
-
-In the project directory, you can run:
+* 登入帳號後,可以將商品加入購物車
+* 結合commerce.js列出商品
 
 ### `npm start`
 
