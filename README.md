@@ -8,6 +8,8 @@
 
 ### 代碼詳解
 
+#### * 帳號狀態切換
+有新的帳號登入時,產生新的購物車的id,如果有登入過得帳號,切換購物車的id,並且使用此購物車id
 ``` 
         const getShop=async ()=>{
             if(shopList.length===0|| shopList.every(item=>item!==userId)){
