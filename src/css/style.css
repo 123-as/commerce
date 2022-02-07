@@ -407,6 +407,7 @@ span {
   border-radius: 5px;
   margin-right: 1.3rem;
   margin-bottom: 1rem;
+  background-color: #fff;
   -webkit-box-shadow: 0 0 2px #797575;
           box-shadow: 0 0 2px #797575;
 }
