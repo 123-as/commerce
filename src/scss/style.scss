@@ -127,19 +127,25 @@ span{
             padding:1.25rem 0;
             font-size: 1.1rem;
             font-weight: 800;
-
+            position: relative;
             //hover效果
             &::after{
                 content: '';
-                width: 0;
-                height: 0.5rem;
-                display: block;
-                background: $gray;
-                transition: .3s;
+                width: 5px;
+                height: 100%;
+                background: $yellow;
+                position: absolute;
+                transition: transform  .3s cubic-bezier(1,0,0,1),width  .3s .3s  cubic-bezier(1,0,0,1);
+                top:0;
+                left: 0;
+                z-index: -1;
+                transform: scaleY(0);
             }
             &:hover{
+                color:#000;
                 &::after{
-                    width: 40%;
+                    width: 60%;
+                    transform: scaleY(1);
                 }
             }
 

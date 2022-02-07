@@ -37,7 +37,16 @@ const GoogleAuth=()=>{
 
     const renderButton=()=>{
         if(isSigned===null)
-            return;
+            return (
+                <>
+                <Link className="header-cart" to='/product'>
+                    <div className="header-cart-shop header-cart-search">Products</div>
+                    <div className="header-cart-icon">
+                        <i className="fas fa-search"></i>
+                    </div>
+                </Link> 
+                </>
+            );
         else if(isSigned===true)
             return (
                 <>
