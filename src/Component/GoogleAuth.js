@@ -16,7 +16,7 @@ const GoogleAuth=()=>{
     useEffect(()=>{
         window.gapi.load('client:auth2',()=>{
             window.gapi.client.init({
-                clientId:'382897703094-t1ej2mcduaf289glg1d2it3eo04ckguf.apps.googleusercontent.com',
+                clientId:'382897703094-anoltm2q433iqm1vaofap65etqs3vcfk.apps.googleusercontent.com',
                 scope:'email'
             }).then(()=>{
                 //判斷目前是否登入
