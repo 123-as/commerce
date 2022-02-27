@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import React,{useEffect,useState} from 'react';
 import { commerce } from "./Commerce";
-const Address =({order,next})=>{
+import {motion,AnimatePresence} from 'framer-motion';
+const Address =({order,next,step})=>{
     const {register,handleSubmit,formState:{errors}}=useForm();
 
     const [countries,setCountries]=useState([]);
@@ -58,64 +59,79 @@ const Address =({order,next})=>{
         next();
     }
     return (
-        <form className="form"  onSubmit={handleSubmit(onSubmit)}>
-            <h4 className="form-title">Shipping Information</h4>
-            <div className="">
-                <label>Name</label>
-                <div className="form-row">
-                    <div className="form-column">
-                        <input type="text"  placeholder="First Name" {...register("firstName",{required:true})} autoComplete="off"/>
-                        {errors.firstName&&(
-                        <div className="form-error">
-                            <div className="form-error-name">需填上正確姓名</div>
-                        </div>) }
+        <AnimatePresence>
+            {
+                step===0&&
+                <motion.form  exit={{x:"-100vw"}} className="form"  onSubmit={handleSubmit(onSubmit)}>
+                    <motion.h4 className="form-title"
+                    initial={{opacity:0}}
+                    animate={{opacity:1}}
+                    >
+                        Shipping Information
+                    </motion.h4>
+                    <motion.div 
+                    initial={{opacity:0}}
+                    animate={{opacity:1}}
+                    transition={{delay:.5}}
+                    >
+                        <label>Name</label>
+                        <div className="form-row">
+                            <div className="form-column">
+                                <input type="text"  placeholder="First Name" {...register("firstName",{required:true})} autoComplete="off"/>
+                                {errors.firstName&&(
+                                <div className="form-error">
+                                    <div className="form-error-name">需填上正確姓名</div>
+                                </div>) }
+                            </div>
+        
+                            <div className="form-column">
+                                <input type="text"  placeholder="Last Name" {...register("lastName",{required:true})} />
+                                {errors.lastName&&(
+                                <div className="form-error">
+                                    <div className="form-error-name">需填上正確姓名</div>
+                                </div>) }
+                            </div>
+                        </div>
+        
+                    <div className="form-row">
+                        <div className="form-column">
+                            <label>Country</label>
+                            <select className="form-select" {...register("country")} onChange={(e)=>setCountry(e.target.value)}>
+                                {countArr.map(item=>(
+                                    <option key={item.id} value={item.id}>{item.value}</option>
+                                ))}
+                            </select>
+                        </div>
+        
+                        <div className="form-column">
+                            <label>State</label>
+                            <select className="form-select" {...register("state")}>
+                                {stateArr.map(item=>(
+                                    <option key={item.id} value={item.id}>{item.value}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
-
-                    <div className="form-column">
-                        <input type="text"  placeholder="Last Name" {...register("lastName",{required:true})} />
-                        {errors.lastName&&(
-                        <div className="form-error">
-                            <div className="form-error-name">需填上正確姓名</div>
-                        </div>) }
+                
+                    <div className="form-row">
+                        <div className="form-column">
+                            <label>Shippment</label>
+                            <select className="form-select" {...register("ship")}>
+                            {ships.map(item=>(
+                                <option onChange={(e)=>setCountry(e.target.value)} key={item.id} value={item.id}>{`${item.description}--${item.price.formatted_with_symbol}`}</option>
+                            ))}
+                            </select>
+                        </div>    
                     </div>
-                </div>
-            </div>
-
-            <div className="form-row">
-                <div className="form-column">
-                    <label>Country</label>
-                    <select className="form-select" {...register("country")} onChange={(e)=>setCountry(e.target.value)}>
-                        {countArr.map(item=>(
-                            <option key={item.id} value={item.id}>{item.value}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="form-column">
-                    <label>State</label>
-                    <select className="form-select" {...register("state")}>
-                        {stateArr.map(item=>(
-                            <option key={item.id} value={item.id}>{item.value}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-           
-            <div className="form-row">
-                <div className="form-column">
-                    <label>Shippment</label>
-                    <select className="form-select" {...register("ship")}>
-                    {ships.map(item=>(
-                        <option onChange={(e)=>setCountry(e.target.value)} key={item.id} value={item.id}>{`${item.description}--${item.price.formatted_with_symbol}`}</option>
-                    ))}
-                    </select>
-                </div>    
-            </div>
-
-            <div >
-                <button  className="form-button">Submit</button>
-            </div>
-        </form>
+        
+                    <div >
+                        <button  className="form-button">Submit</button>
+                    </div>
+                    </motion.div>
+                </motion.form>
+            }
+        
+        </AnimatePresence>
     )
 }
 

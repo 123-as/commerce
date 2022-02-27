@@ -8,10 +8,10 @@ html,body{
 *,*::after,*::before{
     box-sizing: inherit;
     user-select: none;
-}
-body{
     margin: 0;
     padding: 0;
+}
+body{
     font-size: 1rem;
     font-size: 1rem;
     line-height: 1.3;
@@ -44,7 +44,7 @@ span{
 .header{
     display: flex;
     justify-content: space-between;
-    padding:1rem ;
+    padding:1rem 0;
     align-items: center;
     color:#fff;
     &-google{
@@ -80,6 +80,7 @@ span{
         color:$silver;
         text-align: center;
         display: flex;
+        position: relative;
         &-shop{
           transform: scale(0);
           margin-right: -2.5rem;
@@ -87,6 +88,14 @@ span{
         }
         &-search{
            margin-right: -4.3rem;
+        }
+        &-count{
+            color:#eee;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            top:2px;
+            right: 8px;
         }
         &:hover &-shop{
           transform: scale(1);
@@ -417,7 +426,7 @@ span{
 //Address
 .form{
     padding: 1rem;
-
+    flex:100%;
     &-title{
         border-bottom: 1px solid #e5e5ee;
         padding-bottom: 0.5rem;
@@ -664,4 +673,18 @@ span{
 }
 .accordion{
     background: radial-gradient(#fff,$silver);
+}
+
+.module{
+    position: fixed;
+    background-color: #000;
+    z-index: 1;
+    color:#fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:40vh;
+    right:1rem;
+    padding:.8rem 1rem;
 }

@@ -5,11 +5,14 @@ import {Link,useHistory} from 'react-router-dom';
 
 
 const GoogleAuth=()=>{
+    const userId=useSelector(state=>state.useID.id);
+    const cartList=useSelector(state=>state.shopList[userId]);
     const isSigned=useSelector((state)=>state.useID.isSigned);
 
     const dispatch=useDispatch();
 
     const history=useHistory();
+    //382897703094-t1ej2mcduaf289glg1d2it3eo04ckguf.apps.googleusercontent.com
     useEffect(()=>{
         window.gapi.load('client:auth2',()=>{
             window.gapi.client.init({
@@ -18,6 +21,7 @@ const GoogleAuth=()=>{
             }).then(()=>{
                 //判斷目前是否登入
                 showIsSigned(window.gapi.auth2.getAuthInstance().isSignedIn.get());
+                
                 window.gapi.auth2.getAuthInstance().isSignedIn.listen(showIsSigned);
             })
         })
@@ -60,6 +64,9 @@ const GoogleAuth=()=>{
                     <div className="header-cart-shop">Shop</div>
                     <div className="header-cart-icon">
                         <i className="fas fa-shopping-cart"></i>
+                    </div>
+                    <div className='header-cart-count'>
+                        {cartList&&cartList.total_items}
                     </div>
                 </Link>
 

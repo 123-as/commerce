@@ -1,6 +1,6 @@
 import React from 'react';
-
-const Payment=({back,order,next})=>{
+import { motion,AnimatePresence } from 'framer-motion';
+const Payment=({back,order,next,step})=>{
 
     const getdetail=()=>{
         return order.live.line_items.map(item=>(      
@@ -15,20 +15,45 @@ const Payment=({back,order,next})=>{
             </div>
         ))
     }
-
+    const containerAnimate={
+        hidden:{
+            opacity:0,
+            x:"100vw"
+        },
+        visible:{
+            opacity:1,
+            x:0,
+            transition:{
+                delay:.5
+            }
+        },
+        exit:{
+            x:"100vw",
+        }
+    }
     return (
-        <>
-            <div style={{padding:"1rem"}}>
-                {getdetail()}
-                <div style={{fontWeight:"700",fontSize:"1.6rem",margin:"1.8rem 0"}} className="right">
-                    總價錢:{order.live.subtotal.formatted_with_symbol}
-                </div>
-                <div style={{clear:"both"}} className="right">
-                    <button className="payment-btn" onClick={back}>back</button>
-                    <button className="payment-btn" onClick={next}>pay</button>
-                </div>
-            </div>
-        </>
+            <AnimatePresence>
+                {
+                    step===1&&
+                    <motion.div 
+                    variants={containerAnimate} 
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    style={{padding:"1rem",flex:"100%"}}
+                    >
+                            {getdetail()}
+                            <div style={{fontWeight:"700",fontSize:"1.6rem",margin:"1.8rem 0"}} className="right">
+                                總價錢:{order.live.subtotal.formatted_with_symbol}
+                            </div>
+                            <div style={{clear:"both"}} className="right">
+                                <button className="payment-btn" onClick={back}>back</button>
+                                <button className="payment-btn" onClick={next}>pay</button>
+                            </div>
+                    </motion.div>
+                }
+            </AnimatePresence>
+       
     )
 }
 

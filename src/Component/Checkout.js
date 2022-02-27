@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import { commerce } from './Commerce';
 import Address from './Address';
 import Payment from './Payment';
-
+import {motion} from 'framer-motion';
 
 const Checkout =()=>{
     const [step,changeStep]=useState(0);
@@ -16,7 +16,6 @@ const Checkout =()=>{
         const getOrderId=async ()=>{
             const response = await commerce.checkout.generateToken(cart[userId].id, { type: 'cart'});
             setOrder(response);
-            console.log(response);
         }
 
         if(cart[userId])
@@ -32,10 +31,37 @@ const Checkout =()=>{
     }
 
     const form=()=>{
-        return step===0? order&&<Address order={order} next={next}/>: <Payment back={back} order={order}  next={next}/>
+    
+        return  (
+            <div style={{display:"flex"}}>
+                {order&&<Address order={order} next={next} step={step}/> }                
+                <Payment back={back} order={order}  next={next} step={step}/>
+            </div> 
+        )
+
+    }
+    const containerEffect={
+        hidden:{
+            x:"100vw",
+            opacity:0
+        },
+        visible:{
+            x:0,
+            opacity:1,
+            transition:{
+                type:"spring",
+                mass:.5,
+                damping:8,
+                when:"beforeChildren",
+            }
+        }
     }
     return (
-        <div className="container">
+        <motion.div className="container"
+            variants={containerEffect}
+            initial="hidden"
+            animate="visible"
+        >
             <div className="step">
                 <div className={`step-item ${step===0? "active":"completed"}`}>
                     <div className="step-content">
@@ -59,7 +85,7 @@ const Checkout =()=>{
         {step===2? <div style={{padding:"1rem"}}>完成付款</div>: form() }
         <div>
         </div>
-      </div>
+      </motion.div>
     )
 }
 
